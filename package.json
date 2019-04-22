@@ -1,6 +1,6 @@
 {
   "name": "golf-course-api",
-  "description": "An API to fetch golf course hole information.",
+  "description": "An Express.js API to fetch golf course information",
   "main": "server.js",
   "version": "0.0.1",
   "private": true,
