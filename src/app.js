@@ -2,7 +2,7 @@ import express from 'express';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import indexRouter from './routes/index';
+import courseRouter from './routes/courses';
 
 const app = express();
 
@@ -11,6 +11,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', indexRouter);
+app.use('/courses', courseRouter);
 
 export default app;
