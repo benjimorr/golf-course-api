@@ -1,26 +1,34 @@
 import express from 'express';
 import rp from 'request-promise';
-import $ from 'cheerio';
+import cheerio from 'cheerio';
 
 const router = express.Router();
 
 /* GET list of golf courses for City + State */
 router.get('/', (req, res, next) => {
   const {
-    params: { city, state },
+    query: { city, state },
   } = req;
 
-  const url = `http://courses.swingbyswing.com/courselist/United%20States/${state}/${city}`;
-
-  rp(url)
+  rp(
+    `http://courses.swingbyswing.com/courselist/United%20States/${state}/${city}`
+  )
     .then(html => {
-      console.log($('.course-list a', html));
+      const $ = cheerio.load(html);
+      const courses = $('.course-list h4[class="m-b-0"]')
+        .map((i, element) => {
+          const courseLink = element.parent.attribs.href;
+          const courseId = courseLink.split('/').pop();
+          const courseName = element.children[0].data;
+          const courseCity = element.next.next.data;
+          return { courseId, courseLink, courseName, courseCity };
+        })
+        .get();
+      res.json({ courseCount: courses.length, courses });
     })
     .catch(err => {
-      console.log(err);
+      res.json({ error: err.message });
     });
-
-  res.json({});
 });
 
 export default router;
