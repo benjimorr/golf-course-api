@@ -17,6 +17,10 @@ router.get('/', (req, res, next) => {
       const scoreCardSection = $('.profile-bottom-content .right-content');
       const courseName = scoreCardSection.find('h1').text();
 
+      const address = $('.profile-bottom-content .left-content .address-map')
+        .find('h4')
+        .text();
+
       const frontNine = getNineHoleData(
         scoreCardSection
           .find('.hole-set-scorecard-container')
@@ -31,7 +35,7 @@ router.get('/', (req, res, next) => {
           .find('tbody')
       );
 
-      res.json({ courseName, frontNine, backNine });
+      res.json({ courseName, address, frontNine, backNine });
     })
     .catch(err => {
       res.json({ error: err.message });
