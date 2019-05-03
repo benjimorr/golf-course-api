@@ -90,7 +90,50 @@ Takes a `courseLink` that's obtained from the `/courses` endpoint and returns th
 **Example Response**:
 
 ```json
-{}
+{
+  "courseName": "Balcones Country Club  (Spicewood Course)",
+  "address": " 11210 Spicewood Club Drive, Austin, TX, United States",
+  "frontNine": {
+    "Pro Tee": {
+      "slope": "120",
+      "rating": "71.8",
+      "yardage": [
+        "426",
+        "190",
+        "397",
+        "474",
+        "393",
+        "412",
+        "405",
+        "157",
+        "488"
+      ],
+      "par": ["4", "3", "4", "5", "4", "4", "4", "3", "5"],
+      "handicap": ["11", "15", "1", "9", "3", "7", "13", "17", "5"]
+    },
+    ...
+  },
+  "backNine": {
+    "Pro Tee": {
+      "slope": "120",
+      "rating": "71.8",
+      "yardage": [
+        "334",
+        "568",
+        "203",
+        "377",
+        "476",
+        "177",
+        "355",
+        "353",
+        "390"
+      ],
+      "par": ["4", "5", "3", "4", "5", "3", "4", "4", "4"],
+      "handicap": ["18", "2", "6", "8", "10", "12", "4", "16", "14"]
+    },
+    ...
+  }
+}
 ```
 
 ## Deployment
@@ -105,7 +148,13 @@ heroku login
 heroku apps:create golf-course-api
 ```
 
-3. Check your git remotes to ensure heroku is there
+3. Set npm production config to false to allow babel to work properly
+
+```bash
+heroku config:set NPM_CONFIG_PRODUCTION=false
+```
+
+4. Check your git remotes to ensure heroku is there
 
 ```bash
 git remote -v
@@ -115,7 +164,7 @@ heroku https://git.heroku.com/golf-course-api.git (fetch)
 heroku https://git.heroku.com/golf-course-api.git (push)
 ```
 
-4. Deploy the app
+5. Deploy the app
 
 ```bash
 git push heroku master
