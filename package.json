@@ -5,7 +5,11 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "nodemon server.js --exec babel-node"
+    "dev": "nodemon ./src/server.js --exec babel-node",
+    "clean": "rm -rf build && mkdir build",
+    "build-babel": "babel -d ./build ./src -s",
+    "build": "npm run clean && npm run build-babel",
+    "start": "npm run build && node ./build/server.js"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
