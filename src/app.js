@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
@@ -6,6 +7,8 @@ import courseRouter from './routes/courses';
 import scorecardRouter from './routes/scorecard';
 
 const app = express();
+
+app.use(cors());
 
 app.use(logger('dev'));
 app.use(express.json());
