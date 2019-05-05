@@ -1,58 +1,52 @@
-const returnTableRows = element =>
-  element.children
-    .filter(el => el.name === 'td')
-    .reduce((accm, el, i) => {
-      if (i < 9) {
-        if (el.children.length) {
-          accm.push(el.children[0].data);
-        }
+const returnTableRows = element => {
+  const rowData = [];
+  element.children().each((i, element) => {
+    if (element.name === 'td' && i < 11) {
+      if (element.children.length) {
+        rowData.push(element.children[0].data.trim());
       }
-      return accm;
-    }, []);
+    }
+  });
+  return rowData;
+};
 
-export const getNineHoleData = table => {
+export const getNineHoleData = (tee, table) => {
   const nineHoleData = {};
-  let teeName = '';
 
-  table
-    .find('tr')
-    .not(':first-child')
-    .each((i, element) => {
-      // Get the current row name and create a key for it in the nineHoleData obj
-      const rowName = element.children[1].children[0].data.trim();
+  nineHoleData.yardage = returnTableRows(
+    table.find(`th:contains(${tee})`).parent()
+  );
 
-      if (rowName.includes('Tee')) {
-        teeName = rowName;
-        nineHoleData[teeName] = {};
+  nineHoleData.par = returnTableRows(
+    table
+      .find(`th:contains(${tee})`)
+      .parent()
+      .next()
+  );
 
-        // Get the TD data from the Tee row
-        const tdRows = element.children.filter(el => el.name === 'td');
-
-        // Set the slope and rating for the tee
-        nineHoleData[teeName].slope = tdRows[10].children[0].data.trim();
-        nineHoleData[teeName].rating = tdRows[11].children[0].data.trim();
-
-        // Get the TD data specific to yardage
-        const yardage = tdRows.reduce((accm, el, i) => {
-          if (i < 9) {
-            accm.push(el.children[0].data);
-          }
-          return accm;
-        }, []);
-        // Set the yardage for the tee
-        nineHoleData[teeName].yardage = yardage;
-      } else if (rowName === 'Par') {
-        // Get the TD data specific for par
-        const par = returnTableRows(element);
-        // Set the par for the tee
-        nineHoleData[teeName].par = par;
-      } else if (rowName === 'S.I.') {
-        // Get the TD data specific for handicap
-        const handicap = returnTableRows(element);
-        // Set the handicap for the tee
-        nineHoleData[teeName].handicap = handicap;
-      }
-    });
+  nineHoleData.handicap = returnTableRows(
+    table
+      .find(`th:contains(${tee})`)
+      .parent()
+      .next()
+      .next()
+  );
 
   return nineHoleData;
+};
+
+export const getCourseSlope = (tee, table) => {
+  const teeName = table.find(`th:contains(${tee})`);
+  return teeName
+    .parent()
+    .children()[11]
+    .children[0].data.trim();
+};
+
+export const getCourseRating = (tee, table) => {
+  const teeName = table.find(`th:contains(${tee})`);
+  return teeName
+    .parent()
+    .children()[12]
+    .children[0].data.trim();
 };
