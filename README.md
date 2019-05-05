@@ -50,28 +50,28 @@ Takes a U.S. city and state as query parameters and returns a list of golf cours
 
 ```json
 {
-    "courseCount": 25,
-    "courses": [
-        {
-            "courseId": "11432",
-            "courseLink": "/courses/United-States/TX/Austin/Balcones-Country-Club---Spicewood-Course-/11432",
-            "courseName": "Balcones Country Club  (Spicewood Course)",
-            "courseCity": "Austin, TX"
-        },
-        {
-            "courseId": "11460",
-            "courseLink": "/courses/United-States/TX/Austin/Lost-Creek-Country-Club/11460",
-            "courseName": "Lost Creek Country Club",
-            "courseCity": "Austin, TX"
-        },
-        {
-            "courseId": "12310",
-            "courseLink": "/courses/United-States/TX/Austin/Falconhead-Golf-Club/12310",
-            "courseName": "Falconhead Golf Club",
-            "courseCity": "Austin, TX"
-        },
-        ...
-    ]
+  "courseCount": 25,
+  "courses": [
+    {
+      "courseId": "11432",
+      "courseLink": "/courses/United-States/TX/Austin/Balcones-Country-Club---Spicewood-Course-/11432",
+      "courseName": "Balcones Country Club  (Spicewood Course)",
+      "courseCity": "Austin, TX"
+    },
+    {
+      "courseId": "11460",
+      "courseLink": "/courses/United-States/TX/Austin/Lost-Creek-Country-Club/11460",
+      "courseName": "Lost Creek Country Club",
+      "courseCity": "Austin, TX"
+    },
+    {
+      "courseId": "12310",
+      "courseLink": "/courses/United-States/TX/Austin/Falconhead-Golf-Club/12310",
+      "courseName": "Falconhead Golf Club",
+      "courseCity": "Austin, TX"
+    },
+    // ...
+  ]
 }
 ```
 
@@ -93,45 +93,46 @@ Takes a `courseLink` that's obtained from the `/courses` endpoint and returns th
 {
   "courseName": "Balcones Country Club  (Spicewood Course)",
   "address": " 11210 Spicewood Club Drive, Austin, TX, United States",
-  "frontNine": {
+  "tees": {
     "Pro Tee": {
       "slope": "120",
       "rating": "71.8",
-      "yardage": [
-        "426",
-        "190",
-        "397",
-        "474",
-        "393",
-        "412",
-        "405",
-        "157",
-        "488"
-      ],
-      "par": ["4", "3", "4", "5", "4", "4", "4", "3", "5"],
-      "handicap": ["11", "15", "1", "9", "3", "7", "13", "17", "5"]
+      "frontNine": {
+        "yardage": [
+          "426",
+          "190",
+          "397",
+          "474",
+          "393",
+          "412",
+          "405",
+          "157",
+          "488",
+          "3342"
+        ],
+        "par": ["4", "3", "4", "5", "4", "4", "4", "3", "5", "36"],
+        "handicap": ["11", "15", "1", "9", "3", "7", "13", "17", "5"]
+      },
+      "backNine": {
+        "yardage": [
+          "334",
+          "568",
+          "203",
+          "377",
+          "476",
+          "177",
+          "355",
+          "353",
+          "390",
+          "3233"
+        ],
+        "par": ["4", "5", "3", "4", "5", "3", "4", "4", "4", "36"],
+        "handicap": ["18", "2", "6", "8", "10", "12", "4", "16", "14"]
+      },
+      "totalYardage": 6575,
+      "totalPar": 72
     },
-    ...
-  },
-  "backNine": {
-    "Pro Tee": {
-      "slope": "120",
-      "rating": "71.8",
-      "yardage": [
-        "334",
-        "568",
-        "203",
-        "377",
-        "476",
-        "177",
-        "355",
-        "353",
-        "390"
-      ],
-      "par": ["4", "5", "3", "4", "5", "3", "4", "4", "4"],
-      "handicap": ["18", "2", "6", "8", "10", "12", "4", "16", "14"]
-    },
-    ...
+    // ...
   }
 }
 ```
