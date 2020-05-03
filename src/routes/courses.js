@@ -10,9 +10,7 @@ router.get('/', (req, res, next) => {
     query: { city, state },
   } = req;
 
-  rp(
-    `http://courses.swingbyswing.com/courselist/United%20States/${state}/${city}`
-  )
+  rp(`${process.env.BASE_URL}/courselist/United%20States/${state}/${city}`)
     .then(html => {
       const $ = cheerio.load(html);
       const courses = $('.course-list h4[class="m-b-0"]')

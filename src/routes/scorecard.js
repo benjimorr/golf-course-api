@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
 
   const tees = {};
 
-  rp(`http://courses.swingbyswing.com${link}`)
+  rp(`${process.env.BASE_URL}${link}`)
     .then(html => {
       const $ = cheerio.load(html);
       const scoreCardSection = $('.profile-bottom-content .right-content');
@@ -27,9 +27,6 @@ router.get('/', (req, res, next) => {
         .find('tbody');
 
       const courseName = scoreCardSection.find('h1').text();
-      const address = $('.profile-bottom-content .left-content .address-map')
-        .find('h4')
-        .text();
 
       // Loop over tee names to add them to the tees obj
       frontNineScoreCard.find('.color-row').each((i, element) => {
@@ -57,7 +54,7 @@ router.get('/', (req, res, next) => {
           +tees[key].frontNine.par[9] + +tees[key].backNine.par[9];
       });
 
-      res.json({ courseName, address, tees });
+      res.json({ courseName, tees });
     })
     .catch(err => {
       res.json({ error: err.message });
