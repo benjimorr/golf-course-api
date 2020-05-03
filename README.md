@@ -70,7 +70,7 @@ Takes a U.S. city and state as query parameters and returns a list of golf cours
       "courseName": "Falconhead Golf Club",
       "courseCity": "Austin, TX"
     },
-    // ...
+    ...
   ]
 }
 ```
@@ -92,7 +92,6 @@ Takes a `courseLink` that's obtained from the `/courses` endpoint and returns th
 ```json
 {
   "courseName": "Balcones Country Club  (Spicewood Course)",
-  "address": " 11210 Spicewood Club Drive, Austin, TX, United States",
   "tees": {
     "Pro Tee": {
       "slope": "120",
@@ -132,7 +131,7 @@ Takes a `courseLink` that's obtained from the `/courses` endpoint and returns th
       "totalYardage": 6575,
       "totalPar": 72
     },
-    // ...
+    ...
   }
 }
 ```
